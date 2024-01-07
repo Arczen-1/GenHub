@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title>GenHub</title>
+</head>
+<body>
+
+<div id="container">
+  <div id="shape1" class="shape"></div>
+  <div id="shape2" class="shape"></div>
+  <div id="shape3" class="shape"></div>
+
+  <div id="title">BUSINESS NAME GENERATOR</div>
+  <div id="subtitle">generate a brand name using AI</div>
+
+  <div id="inputContainer">
+    <textarea id="keywords" placeholder="Enter Keywords..."></textarea>
+  </div>
+
+  <button id="generateButton">GENERATE</button>
+
+  <div id="logo">|| GENHUB</div>
+
+  <div id="generatedTextContainer" class="horizontal-container">
+    {{generatedResults}}
+
+</div>
+</div>
+
+
+
+<script>
+   document.getElementById('generateButton').addEventListener('click', async function () {
+    const keywords = document.getElementById('keywords').value;
+
+    try {
+      const response = await fetch('/generate-text', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ keywords }),
+      });
+
+      
+      if (response.ok) {
+        try {
+          const result = await response.json();
+          const generatedResults = result.generatedText;
+
+          // Navigate to the results page
+          window.location.href = '/results?generatedResults=' + encodeURIComponent(generatedResults);
+        } catch (jsonError) {
+          console.error('Error parsing JSON response:', jsonError);
+        }
+      } else {
+        console.error('Server error:', response.status, response.statusText);
+      }
+    } catch (fetchError) {
+      console.error('Error sending request:', fetchError);
+    }
+  });
+</script>
+</body>
+</html>
