@@ -4,10 +4,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const OpenAI = require ("openai");
 
-
+const databaseUrl = process.env.apiKey;
 const openai = new OpenAI({
   organization: 'org-zwpIPRGGdZ3bDZMGwFLu3XEN',
-  apiKey: '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'
+  apiKey: databaseUrl
 });
 
 const app = express();
