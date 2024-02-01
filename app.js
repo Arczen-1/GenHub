@@ -13,10 +13,6 @@ const openai = new OpenAI({
 const app = express();
 const port = 3000;
 
-
-const apiKey = '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';
-
-
 app.set('view engine', 'hbs');
 
 
