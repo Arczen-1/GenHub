@@ -7,8 +7,8 @@ const axios = require('axios');
 const app = express();
 const port = 3000;
 
-// Replace 'YOUR_API_KEY' with your actual GPT-3 API key
-const apiKey = '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';
+
+const apiKey = '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';
 
 // Set the view engine to Handlebars
 app.set('view engine', 'hbs');
@@ -28,10 +28,7 @@ app.use(bodyParser.json());
 // Define a simple route
 app.get('/', (req, res) => {
   // Render the 'index' view with a variable
-  res.render('index', {
-    title: 'Express with Handlebars and GPT-3',
-    message: 'Welcome to the template!'
-  });
+  res.render('index');
 });
 
 // Handle the /results route
@@ -44,14 +41,14 @@ app.get('/results', (req, res) => {
 });
 
 
-// Example route to interact with GPT-3
+
 app.post('/generate-text', async (req, res) => {
   try {
     const { keywords } = req.body;
 
     // Use axios to make a POST request to the OpenAI API
     const response = await axios.post(
-      'https://api.openai.com/v1/engines/text-davinci-003/completions',
+      'https://api.openai.com/v1/engines/	gpt-3.5-turbo-instruct/completions',
       {
         prompt: "Generate creative business names related to the keyword:" + keywords,
         max_tokens: 100
